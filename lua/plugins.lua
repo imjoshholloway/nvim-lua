@@ -1,3 +1,13 @@
+local execute = vim.api.nvim_command
+local fn = vim.fn
+
+local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  execute 'packadd packer.nvim'
+end
+
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
 vim.cmd [[packadd packer.nvim]]
 
@@ -17,21 +27,31 @@ return require("packer").startup(function(use)
   use "onsails/lspkind-nvim"
   use "nvim-lua/lsp-status.nvim"
 
-  --use "hrsh7th/vim-vsnip"
-  --use "windwp/nvim-autopairs"
+  use "terrortylor/nvim-comment"
+  use "folke/which-key.nvim"
+  -- fuzzy finder
+  use {
+    "nvim-telescope/telescope.nvim",
+    requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
+  }
+
+  use {
+    "lewis6991/gitsigns.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  }
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  }
+
   -- nice scrolling
   use "karb94/neoscroll.nvim"
 
+  -- pretty quickfix styles
   use {
-    "folke/lsp-trouble.nvim",
+    "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
   }
 
   use {
