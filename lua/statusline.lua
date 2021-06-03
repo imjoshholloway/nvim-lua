@@ -33,7 +33,6 @@ table.insert(left, {
     }
 })
 
-
 table.insert(left, {
     statusIcon = {
        provider = function()
@@ -74,23 +73,6 @@ table.insert(left, {
         highlight = {colors.nord, colors.lightbg}
     }
 })
---[[
-table.insert(left, {
-  ShowLspClient = {
-    provider = 'GetLspClient',
-    condition = function ()
-      local tbl = {['dashboard'] = true,['']=true}
-      if tbl[vim.bo.filetype] then
-        return false
-      end
-      return true
-    end,
-    icon = ' :',
-    separator = " ",
-    separator_highlight = {colors.lightbg, colors.lightbg},
-    highlight = {colors.fg, colors.lightbg}
-  }
-})--]]
 
 table.insert(left, {
     LspStatus = {
@@ -111,26 +93,8 @@ table.insert(left, {
     }
 })
 
+-- right hand side
 
-
-table.insert(right, {
-    FileIcon = {
-        provider = "FileIcon",
-        highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, colors.lightbg}
-    }
-})
-
-
-table.insert(right, {
-    FileName = {
-        provider = "FileName",
-        highlight = {colors.fg, colors.lightbg}
-    }
-})
-
-
-
---[[
 table.insert(right, {
     DiffAdd = {
         provider = "DiffAdd",
@@ -156,24 +120,24 @@ table.insert(right, {
 })
 
 table.insert(right, {
-    GitIcon = {
-        provider = function()
-            return "   "
-        end,
-        condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {colors.green, colors.line_bg}
-    }
-})
-
-table.insert(right, {
-    right_LeftRounded = {
+    right_leftRounded = {
         provider = function()
             return ""
         end,
         condition = require("galaxyline.provider_vcs").check_git_workspace,
         separator = " ",
-        separator_highlight = {colors.bg, colors.bg},
-        highlight = {colors.green, colors.lightbg}
+        highlight = {colors.nord, colors.bg}
+    }
+})
+
+table.insert(right, {
+    GitIcon = {
+        provider = function()
+            return "  "
+        end,
+        condition = require("galaxyline.provider_vcs").check_git_workspace,
+        highlight = {colors.bg, colors.nord},
+        separator_highlight = {colors.lightbg, colors.lightbg}
     }
 })
 
@@ -181,16 +145,17 @@ table.insert(right, {
     GitBranch = {
         provider = "GitBranch",
         condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {colors.green, colors.line_bg}
+        highlight = {colors.bg, colors.nord},
+        separator_highlight = {colors.lightbg, colors.lightbg}
     }
 })
 
 table.insert(right, {
-    rightRounded = {
+    right_rightRounded = {
         provider = function()
             return ""
         end,
         condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {colors.green, colors.lightbg}
+        highlight = {colors.nord, colors.bg}
     }
-})--]]
+})

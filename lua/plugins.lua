@@ -18,7 +18,6 @@ return require("packer").startup(function(use)
   -- visuals
   use "kyazdani42/nvim-web-devicons"
   use "folke/tokyonight.nvim"
-  use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
 
   -- lsp
   use "neovim/nvim-lspconfig"
@@ -27,12 +26,25 @@ return require("packer").startup(function(use)
   use "onsails/lspkind-nvim"
   use "nvim-lua/lsp-status.nvim"
 
+  -- language specific tools
+  use "fatih/vim-go"
+  use "rust-lang/rust.vim"
+  use "mfussenegger/nvim-dap"
+
+  use "ntpeters/vim-better-whitespace"
+  use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
   use "terrortylor/nvim-comment"
   use "folke/which-key.nvim"
+
   -- fuzzy finder
   use {
     "nvim-telescope/telescope.nvim",
     requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
+  }
+
+  use {
+    "nvim-telescope/telescope-dap.nvim",
+    requires = {{"nvim-telescope/telescope.nvim"}, {"mfussenegger/nvim-dap"}}
   }
 
   use {
