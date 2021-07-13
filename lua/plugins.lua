@@ -25,10 +25,25 @@ return require("packer").startup(function(use)
   use "hrsh7th/nvim-compe"
   use "onsails/lspkind-nvim"
   use "nvim-lua/lsp-status.nvim"
+  use "nvim-treesitter/nvim-treesitter"
+  use "ray-x/lsp_signature.nvim"
+
+  -- git
+  use "kdheepak/lazygit.nvim"
+  use "mhinz/vim-signify"
+  use "apzelos/blamer.nvim"
 
   -- language specific tools
   use "fatih/vim-go"
-  use "rust-lang/rust.vim"
+  -- use "rust-lang/rust.vim"
+
+  use "sheerun/vim-polyglot"
+  use "rhadley-recurly/vim-terragrunt"
+  use "hashivim/vim-terraform"
+  use "aklt/plantuml-syntax"
+  use "thecodesmith/vim-groovy"
+
+  -- debugging
   use "mfussenegger/nvim-dap"
 
   use "ntpeters/vim-better-whitespace"
@@ -36,6 +51,12 @@ return require("packer").startup(function(use)
   use "terrortylor/nvim-comment"
   use "folke/which-key.nvim"
 
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = function() vim.fn['mkdp#util#install']() end,
+    ft  = {'markdown', 'plantuml'},
+    cmd = 'MarkdownPreview'
+  }
   -- fuzzy finder
   use {
     "nvim-telescope/telescope.nvim",

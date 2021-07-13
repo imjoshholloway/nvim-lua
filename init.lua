@@ -7,6 +7,13 @@ require("telescope").setup()
 require("todo-comments").setup()
 require("trouble").setup()
 
+require'nvim-treesitter.configs'.setup ({
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+})
+
 -- local files
 require("autocomplete")
 require("debug")
@@ -52,15 +59,18 @@ cmd[[set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor
 cmd[[set smarttab]]
 cmd[[set expandtab]]
 cmd[[set shiftwidth=4]]
+cmd[[set tabstop=4]]
 
 cmd[[set clipboard=unnamedplus]]      -- use system clipboard
 cmd[[set timeoutlen=300]]             -- 300ms timeout for keybindings
 
+g.go_gopls_enabled = 0                -- disable vim-go lsp
+g.go_fmt_command   = "goimports"
+g.go_imports_mode  = "goimports"
+
 g.better_whitespace_enabled = 1
 g.strip_whitespace_on_save = 1
-
--- disable vim-go's integration with gopls since we're using lsp-config
-g.go_gopls_enabled = 0
+g.strip_whitespace_confirm = 0
 
 g.mapleader = " "
 g.auto_save = 0
