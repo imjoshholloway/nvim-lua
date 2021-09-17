@@ -1,97 +1,85 @@
-local execute = vim.api.nvim_command
 local fn = vim.fn
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
+    fn.system({'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.api.nvim_command('packadd packer.nvim')
 end
 
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
-vim.cmd [[packadd packer.nvim]]
-
--- using { } when using a different branch of the plugin or loading the plugin with certain commands
 return require("packer").startup(function(use)
-  use {"wbthomason/packer.nvim", opt = true}
+    use "wbthomason/packer.nvim"
 
-  -- visuals
-  use "kyazdani42/nvim-web-devicons"
-  use "folke/tokyonight.nvim"
+    -- visuals
+    use "folke/tokyonight.nvim"
+    use "kyazdani42/nvim-web-devicons"
+    use "glepnir/galaxyline.nvim"
 
-  -- lsp
-  use "neovim/nvim-lspconfig"
-  use "kabouzeid/nvim-lspinstall"
-  use "hrsh7th/nvim-compe"
-  use "onsails/lspkind-nvim"
-  use "nvim-lua/lsp-status.nvim"
-  use "nvim-treesitter/nvim-treesitter"
-  use "ray-x/lsp_signature.nvim"
+    -- workflow
+    use "folke/trouble.nvim"
+    use "folke/which-key.nvim"
 
-  -- git
-  use "kdheepak/lazygit.nvim"
-  use "mhinz/vim-signify"
-  use "apzelos/blamer.nvim"
+    -- lsp
+    use "kabouzeid/nvim-lspinstall"
+    use "neovim/nvim-lspconfig"
+    use "nvim-treesitter/nvim-treesitter"
+    use "hrsh7th/nvim-compe"
+    use "onsails/lspkind-nvim"
+    use "nvim-lua/lsp-status.nvim"
+    use "ray-x/lsp_signature.nvim"
 
-  -- language specific tools
-  use "fatih/vim-go"
-  -- use "rust-lang/rust.vim"
+    use "hrsh7th/vim-vsnip"
+    use "hrsh7th/vim-vsnip-integ"
 
-  use "sheerun/vim-polyglot"
-  use "rhadley-recurly/vim-terragrunt"
-  use "hashivim/vim-terraform"
-  use "aklt/plantuml-syntax"
-  use "thecodesmith/vim-groovy"
+    -- language specific tools
+    use "ray-x/go.nvim"
+    -- use "rust-lang/rust.vim"
 
-  -- debugging
-  use "mfussenegger/nvim-dap"
+    -- git related configs
+    use {
+        "TimUntersberger/neogit",
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim',
+        }
+    }
+    use "samoshkin/vim-mergetool"
+    use {
+        "lewis6991/gitsigns.nvim",
+        requires = "nvim-lua/plenary.nvim",
+    }
 
-  use "ntpeters/vim-better-whitespace"
-  use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
-  use "terrortylor/nvim-comment"
-  use "folke/which-key.nvim"
+    -- debugging
+    use "mfussenegger/nvim-dap"
+    use {
+        "rcarriga/nvim-dap-ui",
+        requires = "mfussenegger/nvim-dap",
+    }
 
-  use {
-    'iamcco/markdown-preview.nvim',
-    run = function() vim.fn['mkdp#util#install']() end,
-    ft  = {'markdown', 'plantuml'},
-    cmd = 'MarkdownPreview'
-  }
-  -- fuzzy finder
-  use {
-    "nvim-telescope/telescope.nvim",
-    requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
-  }
+    use "ntpeters/vim-better-whitespace"
+    use "lukas-reineke/indent-blankline.nvim"
 
-  use {
-    "nvim-telescope/telescope-dap.nvim",
-    requires = {{"nvim-telescope/telescope.nvim"}, {"mfussenegger/nvim-dap"}}
-  }
+    use "iamcco/markdown-preview.nvim"
 
-  use {
-    "lewis6991/gitsigns.nvim",
-    requires = "nvim-lua/plenary.nvim",
-  }
+    -- fuzzy finder
+    use {
+        "nvim-telescope/telescope.nvim",
+        requires = {
+            {"nvim-lua/popup.nvim"},
+            {"nvim-lua/plenary.nvim"},
+        }
+    }
 
-  use {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-  }
+    use {
+        "nvim-telescope/telescope-dap.nvim",
+        requires = {
+            {"nvim-telescope/telescope.nvim"},
+            {"mfussenegger/nvim-dap"},
+        }
+    }
 
-  -- nice scrolling
-  use "karb94/neoscroll.nvim"
-
-  -- pretty quickfix styles
-  use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-  }
-
-  use {
-    "glepnir/galaxyline.nvim",
-    branch = 'main',
-    -- some optional icons
-    requires = {"kyazdani42/nvim-web-devicons"}
-  }
+    use {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+    }
 
 end)

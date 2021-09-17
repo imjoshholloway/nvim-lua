@@ -3,7 +3,8 @@ local gls = gl.section
 local left = gls.left
 local right = gls.right
 
-gl.short_line_list = {" "} -- keeping this table { } as empty will show inactive statuslines
+-- keeping this table { } as empty will show inactive statuslines
+gl.short_line_list = {" "}
 
 local colors = {
     bg = "#1e222a",
@@ -24,19 +25,13 @@ local colors = {
     greenYel = "#EBCB8B"
 }
 
-table.insert(left, {
-    leftRounded = {
-        provider = function()
-            return ""
-        end,
-        highlight = {colors.nord, colors.bg}
-    }
-})
+-- inactive statuslines as thin splitlines
+vim.cmd[[highlight! StatusLineNC gui=underline guibg=NONE guifg=#1e222a]]
 
 table.insert(left, {
     statusIcon = {
        provider = function()
-            return "   "
+            return "  "
         end,
         highlight = {colors.bg, colors.nord},
         separator_highlight = {colors.lightbg, colors.lightbg}
@@ -116,46 +111,5 @@ table.insert(right, {
         provider = "DiffRemove",
         icon = " ",
         highlight = {colors.red, colors.line_bg}
-    }
-})
-
-table.insert(right, {
-    right_leftRounded = {
-        provider = function()
-            return ""
-        end,
-        condition = require("galaxyline.provider_vcs").check_git_workspace,
-        separator = " ",
-        highlight = {colors.nord, colors.bg}
-    }
-})
-
-table.insert(right, {
-    GitIcon = {
-        provider = function()
-            return "  "
-        end,
-        condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {colors.bg, colors.nord},
-        separator_highlight = {colors.lightbg, colors.lightbg}
-    }
-})
-
-table.insert(right, {
-    GitBranch = {
-        provider = "GitBranch",
-        condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {colors.bg, colors.nord},
-        separator_highlight = {colors.lightbg, colors.lightbg}
-    }
-})
-
-table.insert(right, {
-    right_rightRounded = {
-        provider = function()
-            return ""
-        end,
-        condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {colors.nord, colors.bg}
     }
 })
