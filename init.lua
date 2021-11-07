@@ -9,7 +9,7 @@ require("trouble").setup({
     use_lsp_diagnostic_signs = true,
 })
 
-require'nvim-treesitter.configs'.setup ({
+require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
   highlight = {
     enable = true,
@@ -19,11 +19,8 @@ require'nvim-treesitter.configs'.setup ({
   }
 })
 
-require('dap-debug')
-
 require("telescope").setup()
 require("gitsigns").setup()
-require("neogit")
 
 -- local configs
 require("general")

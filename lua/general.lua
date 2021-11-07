@@ -44,6 +44,7 @@ opt.softtabstop = 4
 g.better_whitespace_enabled = 1
 g.strip_whitespace_on_save  = 1
 g.strip_whitespace_confirm  = 0
+
 -- https://github.com/ntpeters/vim-better-whitespace/issues/127
 vim.cmd("autocmd BufWritePre * :StripWhitespace")
 

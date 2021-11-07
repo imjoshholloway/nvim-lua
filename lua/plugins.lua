@@ -16,7 +16,8 @@ return require("packer").startup(function(use)
 
     -- workflow
     use "folke/trouble.nvim"
-    use "folke/which-key.nvim"
+    use "ntpeters/vim-better-whitespace"
+    use "lukas-reineke/indent-blankline.nvim"
 
     -- lsp
     use "kabouzeid/nvim-lspinstall"
@@ -26,27 +27,30 @@ return require("packer").startup(function(use)
     use "onsails/lspkind-nvim"
     use "nvim-lua/lsp-status.nvim"
     use "ray-x/lsp_signature.nvim"
-
     use "hrsh7th/vim-vsnip"
-    use "hrsh7th/vim-vsnip-integ"
 
     -- language specific tools
     use "ray-x/go.nvim"
     -- use "rust-lang/rust.vim"
 
-    -- git related configs
     use {
-        "TimUntersberger/neogit",
-        requires = {
-            'nvim-lua/plenary.nvim',
-            'sindrets/diffview.nvim',
-        }
+        "iamcco/markdown-preview.nvim",
+        run = 'cd app && npm install'
     }
-    use "samoshkin/vim-mergetool"
+
+    use {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+    }
+
+    -- git related configs
     use {
         "lewis6991/gitsigns.nvim",
         requires = "nvim-lua/plenary.nvim",
     }
+
+    use "rhysd/conflict-marker.vim"
+    use "rhysd/committia.vim"
 
     -- debugging
     use "mfussenegger/nvim-dap"
@@ -55,10 +59,13 @@ return require("packer").startup(function(use)
         requires = "mfussenegger/nvim-dap",
     }
 
-    use "ntpeters/vim-better-whitespace"
-    use "lukas-reineke/indent-blankline.nvim"
-
-    use "iamcco/markdown-preview.nvim"
+    use {
+        "nvim-telescope/telescope-dap.nvim",
+        requires = {
+            {"nvim-telescope/telescope.nvim"},
+            {"mfussenegger/nvim-dap"},
+        }
+    }
 
     -- fuzzy finder
     use {
@@ -70,16 +77,9 @@ return require("packer").startup(function(use)
     }
 
     use {
-        "nvim-telescope/telescope-dap.nvim",
-        requires = {
-            {"nvim-telescope/telescope.nvim"},
-            {"mfussenegger/nvim-dap"},
-        }
-    }
-
-    use {
-        "folke/todo-comments.nvim",
-        requires = "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-tree.lua",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function() require("nvim-tree").setup() end
     }
 
 end)
