@@ -74,7 +74,7 @@ table.insert(left, {
         provider = function()
             return require('lsp-status').status()
         end,
-        icon = ' :',
+        icon = ':',
         highlight = {colors.fg, colors.lightbg},
     }
 })

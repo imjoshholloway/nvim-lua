@@ -14,20 +14,28 @@ return require("packer").startup(function(use)
     use "kyazdani42/nvim-web-devicons"
     use "glepnir/galaxyline.nvim"
 
+    -- syntax highting
+    use "nvim-treesitter/nvim-treesitter"
+
     -- workflow
     use "folke/trouble.nvim"
     use "ntpeters/vim-better-whitespace"
     use "lukas-reineke/indent-blankline.nvim"
+    use "jiangmiao/auto-pairs"
+
+    -- auto complete
+    use "hrsh7th/nvim-compe"
 
     -- lsp
-    use "kabouzeid/nvim-lspinstall"
-    use "neovim/nvim-lspconfig"
-    use "nvim-treesitter/nvim-treesitter"
-    use "hrsh7th/nvim-compe"
-    use "onsails/lspkind-nvim"
-    use "nvim-lua/lsp-status.nvim"
-    use "ray-x/lsp_signature.nvim"
-    use "hrsh7th/vim-vsnip"
+    use {
+        "williamboman/nvim-lsp-installer",
+        "neovim/nvim-lspconfig",
+        "onsails/lspkind-nvim",
+        "nvim-lua/lsp-status.nvim",
+        "glepnir/lspsaga.nvim",
+        "ray-x/lsp_signature.nvim",
+        "hrsh7th/vim-vsnip",
+    }
 
     -- language specific tools
     use "ray-x/go.nvim"
