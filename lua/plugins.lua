@@ -15,7 +15,11 @@ return require("packer").startup(function(use)
     use "glepnir/galaxyline.nvim"
 
     -- syntax highting
-    use "nvim-treesitter/nvim-treesitter"
+    use {
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate"
+    }
+    use "sheerun/vim-polyglot"
 
     -- workflow
     use "folke/trouble.nvim"
