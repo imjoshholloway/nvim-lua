@@ -11,8 +11,12 @@ return require("packer").startup(function(use)
 
     -- visuals
     use "folke/tokyonight.nvim"
+    use "Avimitin/neovim-deus"
     use "kyazdani42/nvim-web-devicons"
+
+    -- statusline
     use "glepnir/galaxyline.nvim"
+    use "avimitin/nerd-galaxyline"
 
     -- syntax highting
     use {
@@ -26,6 +30,7 @@ return require("packer").startup(function(use)
     use "lukas-reineke/indent-blankline.nvim"
     use "jiangmiao/auto-pairs"
 
+    -- autocomplete
     use { "hrsh7th/cmp-vsnip", requires = "hrsh7th/nvim-cmp" }
     use { "hrsh7th/vim-vsnip" }
     use { "hrsh7th/cmp-path", requires = "hrsh7th/nvim-cmp" }
@@ -61,9 +66,10 @@ return require("packer").startup(function(use)
         "lewis6991/gitsigns.nvim",
         requires = "nvim-lua/plenary.nvim",
     }
-
+    use "APZelos/blamer.nvim"
     use "rhysd/conflict-marker.vim"
     use "rhysd/committia.vim"
+    use "kdheepak/lazygit.nvim"
 
     -- debugging
     use "mfussenegger/nvim-dap"

@@ -16,7 +16,8 @@ require("gitsigns").setup()
 
 -- local configs
 require("general")
-require("statusline")
+
+require("nvim-tree")
 require("autocomplete")
 require("lsp")
 require("keybindings")

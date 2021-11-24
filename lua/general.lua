@@ -1,7 +1,10 @@
 local opt = vim.opt
 local g = vim.g
 
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme deus')
+vim.cmd('set termguicolors')
+
+g.deus_background = "mid"
 
 g.mapleader = " "
 
@@ -53,3 +56,8 @@ g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level        = false
 g.indent_blankline_filetype_exclude               = {"help", "terminal"}
 g.indent_blankline_buftype_exclude                = {"terminal"}
+
+g.blamer_delay   = 500
+g.blamer_enabled = 1
+
+g.nvim_tree_gitignore = 1
