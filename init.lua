@@ -25,8 +25,6 @@ require("gitsigns").setup()
 -- local configs
 require("general")
 require("statusline")
-require("autocomplete")
 require("lsp")
-
 
 require("keybindings")

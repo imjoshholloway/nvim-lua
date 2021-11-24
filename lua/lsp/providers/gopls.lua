@@ -28,6 +28,8 @@ function Goimports(timeout_ms)
     end
 end
 
+require("go").setup()
+
 vim.api.nvim_command("autocmd BufWritePre *.go lua Goimports(1000)")
 vim.api.nvim_command("autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)")
 

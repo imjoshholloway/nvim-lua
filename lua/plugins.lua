@@ -28,7 +28,10 @@ return require("packer").startup(function(use)
     use "jiangmiao/auto-pairs"
 
     -- auto complete
-    use "hrsh7th/nvim-compe"
+    use {
+        "ms-jpq/coq_nvim", branch = 'coq',
+        run = ":COQdeps"
+    }
 
     -- lsp
     use {
@@ -36,9 +39,7 @@ return require("packer").startup(function(use)
         "neovim/nvim-lspconfig",
         "onsails/lspkind-nvim",
         "nvim-lua/lsp-status.nvim",
-        "glepnir/lspsaga.nvim",
         "ray-x/lsp_signature.nvim",
-        "hrsh7th/vim-vsnip",
     }
 
     -- language specific tools
