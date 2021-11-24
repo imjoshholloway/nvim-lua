@@ -1,8 +1,6 @@
 local lsp_installer = require("nvim-lsp-installer")
 local lsp_installer_servers = require("nvim-lsp-installer.servers")
 
-local coq = require("coq")
-
 require("lsp_signature").setup();
 
 local lsp_status = require("lsp-status");
@@ -58,7 +56,7 @@ local ensure_installed = function(requested_servers)
 
         local opts = {
             on_attach = on_attach,
-            capabilities = vim.tbl_extend('keep', vim.lsp.protocol.make_client_capabilities(), lsp_status.capabilities)
+            capabilities = vim.tbl_extend('keep', require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()), lsp_status.capabilities)
         }
 
         -- disable server if config disabled server list says so
@@ -72,7 +70,7 @@ local ensure_installed = function(requested_servers)
         end
 
         -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-        server:setup(coq.lsp_ensure_capabilities(opts))
+        server:setup(opts)
         vim.cmd([[ do User LspAttachBuffers ]])
     end)
 end

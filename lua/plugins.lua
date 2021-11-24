@@ -1,9 +1,9 @@
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.api.nvim_command('packadd packer.nvim')
+    fn.system({"git", "clone", "--depth=1", "https://github.com/wbthomason/packer.nvim", install_path})
+    vim.api.nvim_command("packadd packer.nvim")
 end
 
 return require("packer").startup(function(use)
@@ -22,16 +22,16 @@ return require("packer").startup(function(use)
     use "sheerun/vim-polyglot"
 
     -- workflow
-    use "folke/trouble.nvim"
     use "ntpeters/vim-better-whitespace"
     use "lukas-reineke/indent-blankline.nvim"
     use "jiangmiao/auto-pairs"
 
-    -- auto complete
-    use {
-        "ms-jpq/coq_nvim", branch = 'coq',
-        run = ":COQdeps"
-    }
+    use { "hrsh7th/cmp-vsnip", requires = "hrsh7th/nvim-cmp" }
+    use { "hrsh7th/vim-vsnip" }
+    use { "hrsh7th/cmp-path", requires = "hrsh7th/nvim-cmp" }
+    use { "hrsh7th/cmp-nvim-lsp", requires = "hrsh7th/nvim-cmp" }
+    use { "hrsh7th/cmp-buffer", requires = "hrsh7th/nvim-cmp" }
+    use { "hrsh7th/nvim-cmp" }
 
     -- lsp
     use {
@@ -48,7 +48,7 @@ return require("packer").startup(function(use)
 
     use {
         "iamcco/markdown-preview.nvim",
-        run = 'cd app && npm install'
+        run = "cd app && npm install"
     }
 
     use {

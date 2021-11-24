@@ -23,7 +23,6 @@ opt.backspace  = { "eol", "indent", "start" }
 
 -- nicer cursor
 opt.guicursor   = "n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor"
-opt.colorcolumn = "80" -- show vertical bar at column 80
 opt.shortmess   = "cF"
 opt.signcolumn  = "yes"
 opt.updatetime = 300
@@ -54,5 +53,3 @@ g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level        = false
 g.indent_blankline_filetype_exclude               = {"help", "terminal"}
 g.indent_blankline_buftype_exclude                = {"terminal"}
-
-g.coq_settings = { auto_start = true }
