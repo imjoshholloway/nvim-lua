@@ -25,7 +25,6 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -57,6 +56,6 @@ cmp.setup({
     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
   },
   formatting = {
-    format = require("lspkind").cmp_format({with_text = true }),
+    format = require("lspkind").cmp_format({with_text = true}),
   }
 })

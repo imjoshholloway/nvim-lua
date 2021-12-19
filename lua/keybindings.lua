@@ -1,11 +1,24 @@
 local map = require("utils").map;
 
--- ctrl-hjkl to navigate splits
-map('n', '<c-k>', '<cmd>wincmd k<cr>')
-map('n', '<c-j>', '<cmd>wincmd j<cr>')
-map('n', '<c-h>', '<cmd>wincmd h<cr>')
-map('n', '<c-l>', '<cmd>wincmd l<cr>')
+local mappings = {
+  -- ctrl-hjkl to navigate splits
+  ['<c-k>'] = '<cmd>wincmd k<cr>',
+  ['<c-j>'] = '<cmd>wincmd j<cr>',
+  ['<c-h>'] = '<cmd>wincmd h<cr>',
+  ['<c-l>'] = '<cmd>wincmd l<cr>',
 
-map('n', '<leader>f', '<cmd>:Telescope find_files<cr>')
-map('n', 'lg', '<cmd>LazyGit<cr>')
-map('n', '<leader>n', '<cmd>:NvimTreeToggle<cr>')
+  -- toggle tree
+  ['<c-n>'] = '<cmd>NvimTreeToggle<cr>',
+
+  ['<leader>f'] = '<cmd>Telescope find_files<cr>',
+  ['<leader>fg'] = '<cmd>Telescope live_grep<cr>',
+
+  ['<leader>gc'] = '<cmd>lua require("telescope").extensions.git_worktree.create_git_worktree()<cr>',
+  ['<leader>gb'] = '<cmd>lua require("telescope").extensions.git_worktree.git_worktree()<cr>',
+
+  ['lg'] = '<cmd>LazyGit<cr>',
+}
+
+for key, val in pairs(mappings) do
+  map('n', key, val)
+end

@@ -10,13 +10,14 @@ return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
     -- visuals
-    use "folke/tokyonight.nvim"
-    use "Avimitin/neovim-deus"
+    use "ful1e5/onedark.nvim"
     use "kyazdani42/nvim-web-devicons"
 
     -- statusline
     use "glepnir/galaxyline.nvim"
-    use "avimitin/nerd-galaxyline"
+
+    -- navigation
+    use "kyazdani42/nvim-tree.lua"
 
     -- syntax highting
     use {
@@ -26,13 +27,22 @@ return require("packer").startup(function(use)
     use "sheerun/vim-polyglot"
 
     -- workflow
+    use "terrortylor/nvim-comment"
+    use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
     use "ntpeters/vim-better-whitespace"
     use "lukas-reineke/indent-blankline.nvim"
     use "jiangmiao/auto-pairs"
+    use {
+        "nvim-telescope/telescope.nvim",
+        requires = {
+            {"nvim-lua/popup.nvim"},
+            {"nvim-lua/plenary.nvim"},
+        }
+    }
 
     -- autocomplete
     use { "hrsh7th/cmp-vsnip", requires = "hrsh7th/nvim-cmp" }
-    use { "hrsh7th/vim-vsnip" }
+    use { "hrsh7th/vim-vsnip", requires = "hrsh7th/nvim-cmp" }
     use { "hrsh7th/cmp-path", requires = "hrsh7th/nvim-cmp" }
     use { "hrsh7th/cmp-nvim-lsp", requires = "hrsh7th/nvim-cmp" }
     use { "hrsh7th/cmp-buffer", requires = "hrsh7th/nvim-cmp" }
@@ -56,16 +66,9 @@ return require("packer").startup(function(use)
         run = "cd app && npm install"
     }
 
-    use {
-        "folke/todo-comments.nvim",
-        requires = "nvim-lua/plenary.nvim",
-    }
-
     -- git related configs
-    use {
-        "lewis6991/gitsigns.nvim",
-        requires = "nvim-lua/plenary.nvim",
-    }
+    use "ThePrimeagen/git-worktree.nvim"
+    use { "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" }
     use "APZelos/blamer.nvim"
     use "rhysd/conflict-marker.vim"
     use "rhysd/committia.vim"
@@ -85,20 +88,4 @@ return require("packer").startup(function(use)
             {"mfussenegger/nvim-dap"},
         }
     }
-
-    -- fuzzy finder
-    use {
-        "nvim-telescope/telescope.nvim",
-        requires = {
-            {"nvim-lua/popup.nvim"},
-            {"nvim-lua/plenary.nvim"},
-        }
-    }
-
-    use {
-        "kyazdani42/nvim-tree.lua",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = function() require("nvim-tree").setup() end
-    }
-
 end)

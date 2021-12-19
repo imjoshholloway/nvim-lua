@@ -1,6 +1,3 @@
-local lsp_installer = require("nvim-lsp-installer")
-local lsp_installer_servers = require("nvim-lsp-installer.servers")
-
 require("lsp_signature").setup();
 
 local lsp_status = require("lsp-status");
@@ -16,7 +13,6 @@ lsp_status.config({
 lsp_status.register_progress();
 
 local on_attach = function(client, bufnr)
-
     local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -41,6 +37,9 @@ local on_attach = function(client, bufnr)
     lsp_status.on_attach(client, bufnr)
 end
 
+local lsp_installer = require("nvim-lsp-installer")
+local lsp_installer_servers = require("nvim-lsp-installer.servers")
+
 local ensure_installed = function(requested_servers)
     -- go through requested_servers and ensure installation
     for _, requested_server in pairs(requested_servers) do
@@ -53,7 +52,6 @@ local ensure_installed = function(requested_servers)
     end
 
     lsp_installer.on_server_ready(function(server)
-
         local opts = {
             on_attach = on_attach,
             capabilities = vim.tbl_extend('keep', require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()), lsp_status.capabilities)

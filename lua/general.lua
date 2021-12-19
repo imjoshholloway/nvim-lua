@@ -1,11 +1,6 @@
 local opt = vim.opt
 local g = vim.g
 
-vim.cmd('colorscheme deus')
-vim.cmd('set termguicolors')
-
-g.deus_background = "mid"
-
 g.mapleader = " "
 
 g.auto_save  = 1
