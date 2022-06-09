@@ -2,7 +2,7 @@ local config = require("lsp.config")
 require("lsp.providers").ensure_installed(config.requested_servers);
 
 require("lspkind").init({
-    with_text = true,
+    mode = "symbol_text",
     symbol_map = {
         Folder = ""
     }

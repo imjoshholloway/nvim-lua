@@ -12,6 +12,8 @@ return require("packer").startup(function(use)
     -- visuals
     use "ful1e5/onedark.nvim"
     use "kyazdani42/nvim-web-devicons"
+    use "tanvirtin/monokai.nvim"
+    use "sainnhe/sonokai"
 
     -- statusline
     use "glepnir/galaxyline.nvim"

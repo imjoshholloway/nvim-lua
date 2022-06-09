@@ -6,7 +6,7 @@ require("onedark").setup({
 })
 
 require("nvim-treesitter.configs").setup({
-  ensure_installed = "maintained",
+  ensure_installed = {"bash", "comment", "json", "proto", "yaml", "typescript", "javascript", "python", "go", "gomod", "gowork", "rust", "lua", "vim"},
   highlight = {
     enable = true,
   },

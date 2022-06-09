@@ -1,41 +1,20 @@
-function Goimports(timeout_ms)
-    local context = { only = { "source.organizeImports" } }
-    vim.validate { context = { context, "t", true } }
+local path = require 'nvim-lsp-installer.core.path'
+local install_root_dir = path.concat {vim.fn.stdpath 'data', 'lsp_servers'}
 
-    local params = vim.lsp.util.make_range_params()
-    params.context = context
+require('go').setup({
+  gopls_cmd = {install_root_dir .. '/go/gopls'},
+  gofmt = 'gopls',
+  goimports = 'gopls',
+  fillstruct = 'gopls',
+  dap_debug = true,
+  dap_debug_gui = true
+})
 
-    -- See the implementation of the textDocument/codeAction callback
-    -- (lua/vim/lsp/handler.lua) for how to do this properly.
-    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
-    if not result or next(result) == nil then return end
-    local actions = result[1].result
-    if not actions then return end
-    local action = actions[1]
-
-    -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
-    -- is a CodeAction, it can have either an edit, a command or both. Edits
-    -- should be executed first.
-    if action.edit or type(action.command) == "table" then
-      if action.edit then
-        vim.lsp.util.apply_workspace_edit(action.edit)
-      end
-      if type(action.command) == "table" then
-        vim.lsp.buf.execute_command(action.command)
-      end
-    else
-      vim.lsp.buf.execute_command(action)
-    end
-end
-
-require("go").setup()
-
-vim.api.nvim_command("autocmd BufWritePre *.go lua Goimports(1000)")
-vim.api.nvim_command("autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)")
+--vim.api.nvim_command("autocmd BufWritePre *.go lua Goimports(1000)")
+vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
+vim.api.nvim_exec([[ autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000) ]], false)
 
 return {
-    goimports = Goimports,
-    cmd = { 'gopls','--remote=auto' },
     settings = {
         gopls = {
             analyses = {
