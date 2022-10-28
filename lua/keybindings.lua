@@ -12,11 +12,6 @@ local mappings = {
 
   ['<leader>f'] = '<cmd>Telescope find_files<cr>',
   ['<leader>fg'] = '<cmd>Telescope live_grep<cr>',
-
-  ['<leader>gc'] = '<cmd>lua require("telescope").extensions.git_worktree.create_git_worktree()<cr>',
-  ['<leader>gb'] = '<cmd>lua require("telescope").extensions.git_worktree.git_worktree()<cr>',
-
-  ['lg'] = '<cmd>LazyGit<cr>',
 }
 
 for key, val in pairs(mappings) do

@@ -1,32 +1,24 @@
-local config = require("lsp.config")
-require("lsp.providers").ensure_installed(config.requested_servers);
+require('lsp_signature').setup()
 
-require("lspkind").init({
-    mode = "symbol_text",
-    symbol_map = {
-        Folder = ""
-    }
+local lsp = require('lsp-zero')
+
+lsp.preset('recommended')
+lsp.nvim_workspace()
+
+lsp.setup_nvim_cmp({
+    sources = {
+        --- These are the default sources for lsp-zero
+        { name = 'path' },
+        { name = 'nvim_lsp', keyword_length = 1 },
+        { name = 'buffer', keyword_length = 2 },
+        { name = 'luasnip', keyword_length = 2 },
+    },
 })
 
--- Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
-        signs = true,
-        update_in_insert = true,
-    }
-)
+lsp.setup()
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus=false, border = 'single' })]]
+-- trigger formatting of the file on save
+vim.api.nvim_exec([[ autocmd BufWritePre * lua vim.lsp.buf.format(nil, 1000) ]], false)
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' })
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-
-vim.notify = function (msg, log_level, _opts)
-    if msg:match("exit code") then return end
-    if log_level == vim.log.levels.ERROR then
-        vim.api.nvim_err_writeln(msg)
-    else
-        vim.api.nvim_echo({{msg}}, true, {})
-    end
-end
+-- trigger go imports on save
+vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
